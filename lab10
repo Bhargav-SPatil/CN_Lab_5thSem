@@ -1,0 +1,58 @@
+#include <stdio.h>
+
+char out[5][5];
+
+int min(int a, int b){
+    return (a<b)? a: b;
+}
+
+void floyd(int a[][100], int n){
+    
+    int i, j, k;
+    for(k=0; k<n; k++){
+        for(i=0; i<n; i++){
+            for(j=0; j<n; j++){
+                a[i][j] = min(a[i][j], (a[i][k] + a[k][j]));
+                if(a[i][j] == (a[i][k] + a[k][j]))
+                out[i][j] = 65 + k;
+            }
+        }
+    }
+}
+
+int main(){
+    int n, a[100][100], i, j;
+    char alphabet[26];
+    printf("Enter the number of vertices: ");
+    scanf("%d", &n);
+    
+    printf("Enter the weighted matrix(enter 99 for infinity): \n");
+    for(i=0; i<n; i++){
+        alphabet[i] = 65 + i;
+        for(j=0; j<n; j++)
+        scanf("%d", &a[i][j]);
+    }
+    
+    floyd(a, n);
+    
+    printf("All pair shortest paths: \n");
+    for(i=0; i<n; i++){
+        printf("Route table entries for router %c \nA \tB \tC \tD \tE \n", alphabet[i]);
+        for(j=0; j<n; j++){
+        printf("%d \t", out[i][j]);
+        printf("%d \t", a[i][j]);
+            
+        }
+        printf("\n");
+    }
+    
+    return 0;
+}
+
+/*
+0 1 1 99 99
+1 0 99 99 99
+1 99 0 1 1
+99 99 1 0 99
+99 99 1 99 0
+*/
