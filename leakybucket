@@ -1,0 +1,39 @@
+#include<stdio.h>
+
+#include<stdlib.h>
+int main()
+{
+int input=0;
+int i=0;
+int bucketlimit=400;
+int op=1;
+printf("Bucket limit is 400\n");
+printf("Rate is 50mbps\n");
+while(op)
+{
+printf("enter the input\n");
+scanf("%d",&i);
+if(i<=400 && input<=400)
+{
+input=input+i;
+input=input-50;
+if(input<=400)
+{
+printf("qty in bucket %d\n",input);
+}
+else if(input>400)
+{
+printf("Bucket limit Exceeded\n");
+}
+}
+else
+{
+printf("Bucket limit Exceeded\n");
+}
+
+printf("press 1 to add input again 0 to end\n");
+
+scanf("%d",&op);
+}
+return 0;
+}
